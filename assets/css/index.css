@@ -913,6 +913,122 @@ section {
   pointer-events: none;
 }
 
+/* ─── Check-in Strip (翩翩泰安) ─── */
+.checkin-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding: 14px 20px;
+  background: var(--moss);
+  border-radius: 10px;
+  color: #fff;
+}
+.checkin-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+.checkin-time {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.checkin-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  opacity: 0.8;
+}
+.checkin-arrow {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* ─── Menu Block ─── */
+.menu-block {
+  margin-top: 16px;
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.menu-subtitle {
+  margin: 0;
+  padding: 10px 20px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--tan);
+  text-align: center;
+  background: var(--linen);
+}
+.menu-title {
+  margin: 0;
+  padding: 6px 20px 14px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--charcoal);
+  text-align: center;
+  background: var(--linen);
+  border-bottom: 1px solid var(--divider);
+}
+.menu-title em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--slate);
+  margin-left: 8px;
+}
+.menu-list {
+  padding: 0;
+  background: var(--parchment);
+}
+.menu-row {
+  padding: 10px 24px;
+  font-size: 14px;
+  color: var(--charcoal);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+}
+.menu-row::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--tan);
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.menu-row:last-child {
+  border-bottom: none;
+}
+.menu-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 24px;
+  background: var(--linen);
+  border-top: 1px solid var(--divider);
+  font-family: "Noto Serif TC", serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: 0.06em;
+}
+.menu-total-price {
+  font-size: 20px;
+  color: var(--tan);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+}
+
 /* ─── Packing ─── */
 .packing-wrap {
   display: grid;
