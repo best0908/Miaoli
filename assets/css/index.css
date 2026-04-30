@@ -1,0 +1,985 @@
+/* ================================================================
+   文青人文旅遊雜誌風格
+   Color: 米白 / 木質 / 墨綠 / 灰藍 / 炭墨
+================================================================ */
+
+:root {
+  --rice:       #f5f0e8;
+  --linen:      #ede8de;
+  --parchment:  #faf7f1;
+  --wood:       #7a5c4a;
+  --moss:       #445c4a;
+  --deep-moss:  #2d3e32;
+  --slate:      #657b8a;
+  --charcoal:   #2a2520;
+  --warm-gray:  #8a8078;
+  --tan:        #b8956a;
+  --light-tan:  #d4b896;
+  --divider:    rgba(120, 100, 80, 0.14);
+  --shadow-sm:  0 2px 16px rgba(42, 37, 32, 0.05);
+  --shadow-md:  0 4px 28px rgba(42, 37, 32, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--rice);
+}
+
+body {
+  margin: 0;
+  color: var(--charcoal);
+  font-family: "Noto Sans TC", sans-serif;
+  background: var(--rice);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Shell ─── */
+.phone-shell {
+  width: min(100%, 480px);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--parchment);
+  position: relative;
+}
+
+/* ─── Hero ─── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  color: #f5f0e4;
+  background: #0d1914;
+}
+
+/* 動態背景圖層：獨立出來才能做 transform 動畫 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url("../../HeroSlider.jpg")
+    center / cover;
+  transform: scale(1.08);
+  transform-origin: center center;
+  will-change: transform;
+  animation: hero-breathe 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  z-index: 0;
+}
+
+/* 靜態疊加層：漸層遮罩 + 底部淡出，保持不動 */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 82%, var(--parchment) 100%),
+    linear-gradient(
+      180deg,
+      rgba(10, 18, 14, 0.08) 0%,
+      rgba(10, 18, 14, 0.40) 52%,
+      rgba(10, 18, 14, 0.86) 100%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: calc(28px + env(safe-area-inset-top)) 28px 44px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.brand-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 228, 0.65);
+}
+
+.brand-name {
+  font-family: "Noto Serif TC", serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* hero-chip 隱藏（設計標注，非旅遊內容） */
+.hero-chip {
+  display: none;
+}
+
+/* Hero copy */
+.hero-copy {
+  display: grid;
+  gap: 22px;
+  padding-top: 16px;
+}
+
+.eyebrow {
+  display: inline-block;
+  width: fit-content;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  font-style: italic;
+  letter-spacing: 0.18em;
+  color: rgba(212, 184, 150, 0.9);
+  border-bottom: 1px solid rgba(212, 184, 150, 0.35);
+  padding-bottom: 4px;
+}
+
+.eyebrow::before {
+  display: none;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: clamp(30px, 8vw, 42px);
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(245, 240, 228, 0.82);
+  max-width: 30ch;
+}
+
+/* Summary 卡片 — 玻璃擬態 Glassmorphism */
+.hero-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background: transparent;
+  border: none;
+}
+
+.summary-card {
+  padding: 18px 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 252, 244, 0.14) 0%,
+    rgba(255, 252, 244, 0.07) 100%
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 248, 234, 0.20);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 250, 238, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  transition: background 0.25s;
+}
+
+.summary-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(212, 184, 150, 0.72);
+}
+
+.summary-value {
+  font-family: "Noto Serif TC", serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.68;
+  color: rgba(245, 240, 220, 0.96);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Hero footer */
+.hero-footer {
+  display: grid;
+  gap: 16px;
+}
+
+.hero-note {
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(240, 233, 218, 0.75);
+  font-style: italic;
+}
+
+.hero-scroll {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  text-align: center;
+  color: rgba(245, 240, 228, 0.6);
+  animation: floaty 2.8s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+@keyframes hero-breathe {
+  0%   { transform: scale(1.08) translate(0%,    0%);    }
+  30%  { transform: scale(1.11) translate(-0.4%, -0.3%); }
+  60%  { transform: scale(1.13) translate(-0.7%, -0.5%); }
+  80%  { transform: scale(1.11) translate(-0.3%, -0.2%); }
+  100% { transform: scale(1.08) translate(0%,    0%);    }
+}
+
+/* ─── Sticky Nav ─── */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  overflow-x: auto;
+  padding: 0 20px;
+  background: rgba(245, 240, 232, 0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--divider);
+  scrollbar-width: none;
+}
+
+.sticky-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-pill {
+  flex: 0 0 auto;
+  padding: 14px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--warm-gray);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-pill:hover {
+  color: var(--moss);
+  border-bottom-color: var(--tan);
+}
+
+/* ─── Main Layout ─── */
+main {
+  padding: 0 0 calc(52px + env(safe-area-inset-bottom));
+}
+
+section {
+  margin-bottom: 0;
+}
+
+.panel {
+  background: var(--parchment);
+  border: none;
+  border-radius: 0;
+  padding: 40px 28px;
+  box-shadow: none;
+  border-bottom: 1px solid var(--divider);
+}
+
+/* ─── Section Typography ─── */
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 0 0 4px;
+  border-radius: 0;
+  background: transparent;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: none;
+  color: var(--tan);
+  border-bottom: 1px solid var(--light-tan);
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 24px;
+  line-height: 1.38;
+  color: var(--charcoal);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.section-lead {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.95;
+  color: var(--warm-gray);
+}
+
+/* ─── Overview — Route ─── */
+.route-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-top: 26px;
+  padding: 18px 0;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+
+.route-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 4px 0;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  letter-spacing: 0.03em;
+}
+
+.route-pill::after {
+  content: "→";
+  color: var(--tan);
+  font-size: 13px;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.route-pill:last-child::after {
+  display: none;
+}
+
+/* ─── Highlight Grid ─── */
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 26px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+}
+
+.mini-card {
+  padding: 18px 18px;
+  background: var(--parchment);
+  border: none;
+  border-radius: 0;
+}
+
+.mini-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--moss);
+}
+
+.mini-card span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.72;
+  color: var(--warm-gray);
+}
+
+/* ─── Spot Cards ─── */
+.spot-grid {
+  display: grid;
+  gap: 36px;
+  margin-top: 28px;
+}
+
+.spot-card {
+  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  margin-top: 28px;
+}
+
+.spot-photo {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.spot-copy {
+  padding: 14px 0 0;
+}
+
+.spot-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.meta-tag {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--tan);
+  letter-spacing: 0.08em;
+}
+
+.meta-tag + .meta-tag::before {
+  content: " · ";
+  color: var(--light-tan);
+  margin: 0 4px;
+}
+
+.spot-photo-wrap {
+  position: relative;
+}
+
+.reservation-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: rgba(44, 37, 32, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #f0ebe0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border-top: 1px solid rgba(212, 184, 150, 0.22);
+}
+
+.spot-title {
+  margin: 0 0 10px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 21px;
+  color: var(--charcoal);
+  font-weight: 700;
+}
+
+.spot-text {
+  margin: 0;
+  color: var(--warm-gray);
+  font-size: 14px;
+  line-height: 1.88;
+}
+
+/* ─── Activity Block (擠牛奶場次) ─── */
+.activity-block {
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
+.activity-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: var(--warm-gray);
+  letter-spacing: 0.08em;
+}
+
+.schedule-table {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--divider);
+}
+
+.schedule-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.schedule-label {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--charcoal);
+  width: 3em;
+}
+
+.schedule-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--light-tan);
+  margin-bottom: 3px;
+}
+
+.schedule-time {
+  flex-shrink: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  color: var(--warm-gray);
+  min-width: 3.2em;
+  text-align: right;
+}
+
+.schedule-row--target .schedule-label,
+.schedule-row--target .schedule-time {
+  color: var(--moss);
+  font-weight: 700;
+}
+
+.schedule-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  padding: 2px 7px;
+  background: var(--moss);
+  color: #f0ebe0;
+  letter-spacing: 0.06em;
+}
+
+/* Timeline highlight row */
+.timeline-item--highlight .timeline-title {
+  color: var(--moss);
+}
+
+.timeline-item--highlight .timeline-time {
+  color: var(--moss);
+  font-weight: 700;
+}
+
+/* ─── Map Links ─── */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  border-bottom: 1px solid rgba(101, 123, 138, 0.28);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.map-link:hover {
+  color: var(--moss);
+  border-color: var(--moss);
+}
+
+.map-link svg {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.map-link:hover svg {
+  transform: translateY(-1px);
+}
+
+.map-link-group,
+.spot-links {
+  display: flex;
+  gap: 18px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.map-link-group .map-link,
+.spot-links .map-link {
+  margin-top: 0;
+}
+
+/* ─── Timeline ─── */
+.timeline {
+  position: relative;
+  margin-top: 36px;
+  padding-left: 0;
+  display: grid;
+  gap: 0;
+}
+
+.timeline::before {
+  display: none;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  row-gap: 3px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--divider);
+  align-items: start;
+}
+
+.timeline-item::before {
+  display: none;
+}
+
+.timeline-time {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: 2px;
+  padding-right: 18px;
+  border-right: 1px solid var(--divider);
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--tan);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.timeline-title {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.timeline-text {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.78;
+  color: var(--warm-gray);
+}
+
+/* ─── Decision Card ─── */
+.decision-card {
+  margin-top: 36px;
+  padding: 24px 24px;
+  background: var(--moss);
+  color: #f2ede4;
+  border-left: 3px solid var(--tan);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.decision-card h3 {
+  margin: 0 0 10px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #f2ede4;
+}
+
+.decision-card p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(242, 237, 228, 0.82);
+}
+
+.decision-list {
+  display: grid;
+  gap: 10px;
+}
+
+.decision-item {
+  padding: 12px 14px;
+  background: rgba(242, 237, 228, 0.07);
+  border-left: 2px solid rgba(212, 184, 150, 0.36);
+  border-radius: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(242, 237, 228, 0.9);
+}
+
+/* ─── Stay — Dual Panels ─── */
+.dual-panels {
+  display: grid;
+  gap: 1px;
+  margin-top: 26px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+}
+
+.info-card {
+  padding: 20px 22px;
+  background: var(--parchment);
+  border: none;
+  border-radius: 0;
+}
+
+.info-card h3 {
+  margin: 0 0 8px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.88;
+  color: var(--warm-gray);
+}
+
+/* ─── Checklist ─── */
+.list {
+  display: grid;
+  gap: 0;
+  margin-top: 26px;
+  border-top: 1px solid var(--divider);
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 15px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--divider);
+  border-radius: 0;
+  font-size: 13px;
+  line-height: 1.78;
+  color: var(--warm-gray);
+}
+
+.list-item::before {
+  content: "";
+  flex: 0 0 4px;
+  width: 4px;
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--tan);
+  box-shadow: none;
+}
+
+/* ─── Pricing ─── */
+.pricing-heading {
+  margin: 32px 0 0;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--tan);
+  border-bottom: 1px solid var(--light-tan);
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 30px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+}
+
+.price-card {
+  padding: 18px 20px;
+  background: var(--parchment);
+  border: none;
+  border-radius: 0;
+}
+
+.price-label {
+  display: block;
+  min-height: 34px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  color: var(--warm-gray);
+  margin-bottom: 8px;
+}
+
+.price-value {
+  display: block;
+  font-family: "Noto Serif TC", serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--moss);
+}
+
+.price-value::after {
+  content: " 元";
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Noto Sans TC", sans-serif;
+  color: var(--warm-gray);
+}
+
+.price-label em {
+  display: block;
+  font-style: normal;
+  font-size: 10px;
+  color: var(--warm-gray);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+.price-card--free {
+  grid-column: span 2;
+}
+
+.price-card--free .price-value {
+  color: var(--slate);
+}
+
+.price-card--free .price-value::after {
+  display: none;
+}
+
+/* ─── Packing ─── */
+.packing-wrap {
+  display: grid;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.packing-card {
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-top: 2px solid var(--moss);
+  padding-top: 16px;
+}
+
+.packing-card h3 {
+  margin: 0 0 14px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--moss);
+  letter-spacing: 0.04em;
+}
+
+.packing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 8px;
+}
+
+.packing-tag {
+  padding: 6px 10px;
+  border-radius: 2px;
+  background: var(--linen);
+  border: 1px solid var(--divider);
+  color: var(--charcoal);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Final Banner ─── */
+.final-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal);
+  color: #f0ebe0;
+  border-bottom: none;
+}
+
+.final-banner::before,
+.final-banner::after {
+  display: none;
+}
+
+.final-banner .section-kicker {
+  color: var(--light-tan);
+  border-color: rgba(212, 184, 150, 0.28);
+}
+
+.final-banner .section-title {
+  color: #f0ebe0;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.final-banner .section-lead {
+  color: rgba(240, 235, 224, 0.76);
+}
+
+.footer-note {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(240, 235, 224, 0.12);
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(240, 235, 224, 0.6);
+  font-style: italic;
+}
+
+
+/* ─── Desktop ─── */
+@media (min-width: 520px) {
+  .phone-shell {
+    margin: 24px auto;
+    box-shadow: 0 0 0 1px var(--divider), 0 20px 56px rgba(42, 37, 32, 0.1);
+  }
+
+  .hero,
+  .hero-inner {
+    min-height: 820px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-scroll { animation: none; }
+  .hero::before {
+    animation: none;
+    transform: scale(1.08);
+  }
+}

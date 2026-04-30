@@ -1,0 +1,8 @@
+.claude/
+.edge-pdf-profile/
+.edge-pdf-profile-2/
+Description/
+
+# Optional local artifacts
+Thumbs.db
+Desktop.ini
