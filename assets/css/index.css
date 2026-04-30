@@ -40,6 +40,7 @@ body {
 img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
 a {
@@ -71,7 +72,7 @@ a {
   position: absolute;
   inset: 0;
   background:
-    url("../../HeroSlider.jpg")
+    url("../../Pic/HeroSlider.jpg")
     center / cover;
   transform: scale(1.08);
   transform-origin: center center;
@@ -281,6 +282,10 @@ a {
   display: none;
 }
 
+.sticky-nav + main .panel[id] {
+  scroll-margin-top: calc(68px + env(safe-area-inset-top));
+}
+
 .nav-pill {
   flex: 0 0 auto;
   padding: 14px 14px;
@@ -298,6 +303,14 @@ a {
 .nav-pill:hover {
   color: var(--moss);
   border-bottom-color: var(--tan);
+}
+
+.nav-pill:focus-visible,
+.map-link:focus-visible,
+.map-image-link:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 /* ─── Main Layout ─── */
@@ -528,6 +541,13 @@ section {
   color: var(--warm-gray);
   letter-spacing: 0.08em;
 }
+.activity-number {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--slate);
+  letter-spacing: 0.04em;
+  margin-left: 2px;
+}
 
 .schedule-table {
   display: flex;
@@ -609,6 +629,11 @@ section {
   border-color: var(--moss);
 }
 
+.map-link:focus-visible {
+  color: var(--moss);
+  border-color: var(--moss);
+}
+
 .map-link svg {
   flex-shrink: 0;
   transition: transform 0.2s;
@@ -616,6 +641,11 @@ section {
 
 .map-link:hover svg {
   transform: translateY(-1px);
+}
+
+.map-link:focus-visible svg,
+.map-image-link:focus-visible .map-image-hint {
+  transform: none;
 }
 
 .map-link-group,
@@ -917,35 +947,35 @@ section {
 .checkin-strip {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 16px;
-  padding: 14px 20px;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 10px 16px;
   background: var(--moss);
-  border-radius: 10px;
+  border-radius: 8px;
   color: #fff;
 }
 .checkin-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   flex: 1;
 }
 .checkin-time {
   font-family: "Cormorant Garamond", serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 .checkin-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.16em;
-  opacity: 0.8;
+  letter-spacing: 0.14em;
+  opacity: 0.75;
 }
 .checkin-arrow {
-  opacity: 0.5;
+  opacity: 0.45;
   flex-shrink: 0;
 }
 
