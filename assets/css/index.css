@@ -911,6 +911,14 @@ section {
 }
 
 /* ─── Platform Buy ─── */
+.pricing-footnote {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
 .platform-buy-wrap {
   margin-top: 20px;
 }
